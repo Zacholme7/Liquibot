@@ -1,0 +1,3 @@
+- monitor for accounts that can be liquidated and send tx to chain as soon as it can be liquidated
+- monitor event logs from latest block
+- gasTokens to reduce gas
