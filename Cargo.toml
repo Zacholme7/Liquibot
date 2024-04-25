@@ -38,3 +38,4 @@ dotenv = "0.15.0"
 serde = { version = "1.0.198", features = ["serde_derive", "derive"] }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
 futures-util = "0.3.30"
+ethers = "2.0.14"

@@ -1,28 +1,12 @@
 
-use std::sync::Arc;
 use alloy::providers::{Provider, RootProvider};
 use alloy::sol_types::{SolEvent, SolEventInterface};
-use alloy::transports::http::Http;
-use alloy::transports::BoxTransport;
+use std::sync::Arc;
 use alloy::pubsub::PubSubFrontend;
 use alloy::rpc::types::eth::{Filter, Log};
-use alloy::primitives::Address;
 use anyhow::Result;
-use alloy::sol;
-use crate::util::Morpho::MorphoEvents;
+use crate::interfaces::Morpho::{self, MorphoEvents};
 use crate::state::State;
-
-const MORPHO_ADDRESS: &str = "0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb";
-sol!(
-    Liquidator,
-    "contracts/out/Liquidator.sol/Liquidator.json"
-
-);
-sol!(
-    #[derive(Debug)]
-    Morpho,
-    "contracts/out/IMorpho.sol/IMorpho.json"
-);
 
 pub async fn sync_to_latest_block(provider: Arc<RootProvider<PubSubFrontend>>, state: &mut State) -> Result<()> {
     // get the current block 

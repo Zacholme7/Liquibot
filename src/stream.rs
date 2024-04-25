@@ -4,7 +4,7 @@ use alloy::rpc::types::eth::{Filter};
 use std::sync::Arc;
 use anyhow::Result;
 use futures_util::stream::StreamExt;
-use crate::util::Morpho::{self, MorphoEvents};
+use crate::interfaces::Morpho::{self, MorphoEvents};
 use crate::event_processor::*;
 use crate::state::State;
 
@@ -24,7 +24,7 @@ pub async fn stream(ws: Arc<RootProvider<PubSubFrontend>>, state: &mut State) ->
         loop {
                 tokio::select! {
                         Some(log) = stream.next() => MorphoEvents::process_log(log, state)?,
-                        Some(block) = block_stream.next() => process_new_block(block) 
+                        Some(block) = block_stream.next() => process_new_block(block, ws.clone(),  state) 
                 }
         }
 

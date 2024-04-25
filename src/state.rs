@@ -2,8 +2,8 @@ use std::collections::HashMap;
 use alloy::primitives::{Address, U256};
 use alloy::rpc::types::eth::Log;
 use alloy::sol_types::SolEventInterface;
-use crate::util::Morpho::{Market, MarketParams, Position};
-use crate::util::Morpho::MorphoEvents;
+use crate::interfaces::Morpho::{Market, MarketParams, Position};
+use crate::interfaces::Morpho::MorphoEvents;
 use anyhow::Result;
 
 impl MorphoEvents {
