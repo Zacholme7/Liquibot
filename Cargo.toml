@@ -35,3 +35,6 @@ proc-macro2 = "=1.0.79"
 anyhow = "1.0.82"
 tokio = {version = "1.37.0", features = ["rt-multi-thread", "macros"]}
 dotenv = "0.15.0"
+serde = { version = "1.0.198", features = ["serde_derive", "derive"] }
+serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+futures-util = "0.3.30"

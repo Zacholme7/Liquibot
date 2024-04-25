@@ -2056,7 +2056,10 @@ dependencies = [
  "alloy",
  "anyhow",
  "dotenv",
+ "futures-util",
  "proc-macro2",
+ "serde",
+ "serde_json",
  "tokio",
 ]
 

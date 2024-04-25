@@ -4,9 +4,11 @@ use alloy::sol_types::SolValue;
 use anyhow::Result;
 use dotenv;
 use std::sync::Arc;
+//use crate::util::Morpho;
 
 use liquibot::util::sync_to_latest_block;
-
+use liquibot::state::State;
+use liquibot::stream::stream;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -22,10 +24,16 @@ async fn main() -> Result<()> {
     let ws_conn = WsConnect::new(wss_url);
     let ws = Arc::new(ProviderBuilder::new().on_ws(ws_conn).await?);
 
-    sync_to_latest_block(ws.clone()).await?;
-    // make the hash of it
+    // Hold all of the state that we need
+    let mut state = State::default();
 
+    // sync all of the information
+    sync_to_latest_block(ws.clone(), &mut state).await?;
+
+    // start streaming
+    stream(ws.clone(), &mut state).await?;
 
     println!("Hello, world!");
     Ok(())
 }
+
